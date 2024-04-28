@@ -1,0 +1,180 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<title>Smash Bros Ideas - Portal de Inicio</title>
+		<base href="./">
+		<meta id="root-path" root-path="./">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, minimum-scale=1.0, maximum-scale=5.0">
+		<meta charset="UTF-8">
+		<meta name="description" content="Smash Bros Ideas - Portal de Inicio para todas las ideas de la saga Super Smash Bros de Sercadi">
+		<meta name="robots" content="index, follow">
+
+		<meta property="og:title" content="Smash Bros Ideas - Portal de Inicio">
+		<meta property="og:description" content="Smash Bros Ideas - Portal de Inicio para todas las ideas de la saga Super Smash Bros de Sercadi">
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="index.html">
+		<meta property="og:image" content="lib/media/smashlogo.png">
+		<meta property="og:image:alt" content="Logo de Smash Bros Ideas">
+		<meta property="og:site_name" content="Smash Bros Ideas">
+		<link rel="alternate" href="https://smashbrosideas.netlify.app/en" hreflang="es-GB">
+		<link rel="canonical" href="https://smashbrosideas.netlify.app">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="lib/styles/diseñomenus.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+		<link rel="icon" type="image/jpg" href="lib/media/favicon.ico">
+	</head>
+
+
+
+	<body class="index">
+
+        <div id="preloader">
+            <div id="loader"></div>
+        </div>
+
+	<main class="hidden">
+
+	<div class="index"> 
+
+
+			<img src="lib/media/smashlogo.png" class="imagenindex" alt="Logo de Smash Bros Ideas" id="imagenindex" title="Logo de Smash Ideas">
+
+		<div class="selector-container">
+			<label for="selector" class="form-label">Selecciona una opción:</label>
+			<select id="selector" class="form-select">
+				<option value="seleccionar">Selecciona una opción</option>	
+				<option value="personajes">Personajes</option>
+				<option value="escenarios">Escenarios</option>
+				<option value="universos">Universos</option>
+				<option value="objetos">Objetos</option>
+				<option value="ayudantes">Ayudantes</option>
+				<option value="pokemon">Pokemon</option>
+                <option value="baul">Baúl</option>
+			</select>
+		</div>
+	</div>
+
+	
+
+
+		<footer class="index">
+
+			<a href="https://twitter.com/sercadi_smash" target="_blank"><i class="fa fa-twitter"></i></a>
+			<a href="https://linkedin.com/sergio-castro-díaz" target="_blank"><i class="fa fa-linkedin"></i></a>
+			<a href="https://sercadi" target="_blank"><i class="fa fa-github"></i></a>
+			<a href="#" target="_blank"><i class="fa fa-steam"></i></a>
+
+			<p id="texto">Web Realizada por Sergio Castro Diaz, Jugador de Smash Bros |  </p>
+
+		</footer>
+
+    </main>
+
+	</body>
+
+
+	<script>
+
+
+document.addEventListener("DOMContentLoaded", function(){
+    var fecha = new Date();
+    var añoActual = fecha.getFullYear();
+    var parrafo = document.getElementById("texto");
+    parrafo.textContent += " - " + añoActual;
+
+
+
+    // Selector con búsqueda automática al teclear
+    var selector = document.getElementById('selector');
+    var options = selector.getElementsByTagName('option');
+    
+    selector.addEventListener('input', function(){
+        var inputValue = this.value.toLowerCase();
+        
+        for(var i = 0; i < options.length; i++) {
+            var optionText = options[i].textContent.toLowerCase();
+            if(optionText.includes(inputValue)) {
+                options[i].selected = true;
+                break;
+            }
+        }
+    });
+
+    // Función para reproducir audio y redirigir
+    function reproducirAudioYRedirigir() {
+        var audio = new Audio('lib/media/MUSICA/sonidoselector.mp3'); // Cambia 'tu_audio.mp3' por la ruta de tu archivo de audio
+        audio.play();
+        
+        setTimeout(function(){
+            var opcionSeleccionada = selector.value;
+            switch(opcionSeleccionada) {
+                case 'personajes':
+                    window.location.href = 'personajes/menu.html';
+                    break;
+                case 'escenarios':
+                    window.location.href = 'escenarios/escenarios.html';
+                    break;
+                case 'universos':
+                    window.location.href = 'universos/universos.html';
+                    break;
+                case 'objetos':
+                    window.location.href = 'objetos/objetos.html';
+                    break;
+                case '':
+                    window.location.href = 'ayudantes/ayudantes.html';
+                    break;
+                case 'pokemon':
+                    window.location.href = 'pokemon/pokemon.html';
+                    break;
+                case 'baul':
+                    window.location.href = 'baul/baul.html';
+                    break;
+                default:
+                    // Redirige a una página por defecto si la opción no coincide con ninguna de las anteriores
+                    window.location.href = 'menuDefault.html';
+            }
+        }, 1000);
+    }
+    
+    // Evento change para el selector
+    selector.addEventListener('change', reproducirAudioYRedirigir);
+    
+    // Restablecer el valor del selector al valor por defecto
+    window.addEventListener('popstate', function(event) {
+        selector.value = ''; // Establece el valor por defecto
+    });
+
+
+
+});
+
+        // Espera a que el contenido de la página se cargue completamente
+        window.addEventListener('load', function() {
+            // Detener la animación de la bola después de 2 segundos
+            setTimeout(function() {
+                var loader = document.getElementById('loader');
+                loader.style.animation = 'none';
+            }, 2000);
+
+            // Ocultar el preloader después de 3 segundos
+            setTimeout(function() {
+                var preloader = document.getElementById('preloader');
+                preloader.classList.add('hidden');
+            }, 3000);
+
+            // Mostrar el contenido principal después de 3 segundos
+            setTimeout(function() {
+                var content = document.querySelector('main');
+                content.classList.remove('hidden');
+            }, 3000);
+        });
+
+
+
+	</script>
+
+
+</html>
+
+
